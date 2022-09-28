@@ -1,5 +1,5 @@
-from DbProcessing import DbProcessing
-from Person import Person
+from acc.DbProcessing import DbProcessing
+from acc.Person import Person
 
 
 class Account:
