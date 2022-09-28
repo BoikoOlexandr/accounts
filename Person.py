@@ -1,10 +1,11 @@
 import datetime
+import logging
 import re
 from dateutil.relativedelta import relativedelta
 
 
 class Person:
-
+    id = 0
     dey_of_death = ""
     first_name = ""
     last_name = ""
@@ -13,7 +14,7 @@ class Person:
     age = 0
     birthday = ""
 
-    def __init__(self, first_name, last_name, birthday, sex, second_name="", day_of_death="", age=0):
+    def __init__(self, id=0, first_name="", second_name="", last_name="", age=0, birthday="", day_of_death="", sex=""):
         self.first_name = first_name
         self.last_name = last_name
         self.birthday = self.__convert_to_date(birthday)
@@ -25,10 +26,16 @@ class Person:
             self.age = age
         else:
             self.age = self.__calculate_age()
+        if id:
+            self.id = id
 
     def __convert_to_date(self, str_date):
-        day, month, year = (int(i.strip()) for i in re.split("-|/| |\.", str_date))
-        return datetime.date(day=day, month=month, year=year)
+        try:
+            day, month, year = (int(i.strip()) for i in re.split("-|/| |\.", str_date))
+            return datetime.date(day=day, month=month, year=year)
+        except Exception:
+            logging.warning(f"Can`'t transform '{str_date}' to valid date")
+            return None
 
     def __calculate_age(self):
         if self.dey_of_death:
@@ -38,7 +45,6 @@ class Person:
 
 
 if __name__ == "__main__":
-    I = Person("Sasha", "Boiko", "11 06 1996", "M")
+    I = Person(first_name="Vitaliy", last_name="Serhienko", birthday="11-06-1996", sex="M")
     print(I.birthday)
     print(I.age)
-
