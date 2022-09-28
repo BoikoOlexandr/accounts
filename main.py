@@ -1,4 +1,4 @@
-from Command import Command
+from acc.Command import Command
 
 while True:
     command = input("""

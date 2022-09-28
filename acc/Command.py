@@ -1,5 +1,5 @@
-from Person import Person
-from account import Account
+from acc.Person import Person
+from acc.account import Account
 
 
 class Command:
