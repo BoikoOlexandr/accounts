@@ -15,9 +15,16 @@ class Account:
         self.Db.add(**person_dict)
 
     def find_persons(self, first_name="", second_name="", last_name=""):
-        persons = self.Db.search(first_name, second_name, last_name)
+        persons = []
+        persons_fetch = self.Db.search(first_name, second_name, last_name)
+        for person in persons_fetch:
+            persons.append(
+                Person(*person)
+            )
+        print(persons)
 
 
 if __name__ == "__main__":
     a = Account()
-    a.add_person(Person("Vitaliy", "Serhienko", "11-06-1996", "M"))
+    # a.add_person(Person("Vitaliy", "Serhienko", "11-06-1996", "M"))
+    a.find_persons(first_name="Sa")
